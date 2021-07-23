@@ -38,27 +38,28 @@ public class QuanLyNguoiDungController {
 		return mav;
 	}
 	
-	@GetMapping(value = "admin/them-admin")
+	@GetMapping(value = "admin/them-admin-shipper")
 	public ModelAndView ThemAdmin() {
 		ModelAndView mv=new ModelAndView("admin/themadmin");
 		return mv;
 	}
 	
-	@PostMapping(value = "admin/them-admin-new")
+	@PostMapping(value = "admin/them-admin-shipper-new")
 	public ModelAndView them(HttpServletRequest request) {
 		ModelAndView mv=new ModelAndView("admin/themadmin");
 		String name = request.getParameter("ten");
 		String pass = request.getParameter("pass");
 		String fullname = request.getParameter("fullname");
 		String diachi = request.getParameter("diachi");
+		Integer luachon=Integer.parseInt(request.getParameter("luachon"));
 		String sdt = request.getParameter("sdt");
 		
 			if(nguoiDungService.findByTenNguoiDung(name) == true) {
-				nguoiDungService.save(diachi, fullname, name, pass, sdt, 1);
+				nguoiDungService.save(diachi, fullname, name, pass, sdt, luachon);
 				
 			}
 			else {
-				request.setAttribute("err", "Tên Admin Đã Tồn Tại");
+				request.setAttribute("err", "Tên  Đã Tồn Tại");
 			}
 			
 		return mv;

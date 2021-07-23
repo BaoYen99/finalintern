@@ -12,7 +12,7 @@
  <div class="container mt-5">
  <form action="quan-ly-nguoi-dung" id="formSubmit" method="get">
   		 <h3 class="text-center">Danh Sách Người Dùng</h3>
-  		<a href="them-admin" class="btn btn-success">Thêm Admin</a>
+  		<a href="them-admin-shipper" class="btn btn-success">Thêm Admin</a>
         <div class="w-100 mt-4">
        
             <table class="w-100 " border="1" >

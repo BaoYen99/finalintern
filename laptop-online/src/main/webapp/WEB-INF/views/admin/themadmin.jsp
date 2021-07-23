@@ -13,7 +13,7 @@
         <h3 style="margin-left: 170px; margin-bottom:30px;color: burlywood;">Thêm Amin</h3>
         
         <div class="form-group " style="margin:0 auto; width: 400px; ">
-            <form action="them-admin-new" method="post">
+            <form action="them-admin-shipper-new" method="post">
             <small id="err-username"></small>
 				<input type="text" class="form-control mb-4" name="ten" id="ten"
 					placeholder="UserName" required="true"> 
@@ -40,6 +40,12 @@
 					class="form-control mb-4 " name="pass-confirm" id="pass-confirm"
 					placeholder="Confirm Password"  required="true">
 	 
+	 			<select " name="luachon">
+				<option value="1">ADMIN</option>
+				
+				<option value="3">SHIPPER</option>	
+							
+			</select> 
 				<button class="btn btn-danger w-25" style="margin-left: 90px;"
 					type="submit" id="submit">Register</button>
 					<a href="quan-ly-nguoi-dung?page=1&limit=14" style="text-decoration: none; color: white"  class="btn btn-danger w-25  ml-3" >Trở lại</a> 
