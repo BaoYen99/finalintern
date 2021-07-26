@@ -25,5 +25,10 @@ public class ChiTietDonHangService {
 		chiTietDonHangRepo.deleteById(id);
 		
 	}
+
+	public List<ChiTietDonHang> getByMaSanPham(Integer id) {
+		// TODO Auto-generated method stub
+		return chiTietDonHangRepo.getByMaSanPham(id);
+	}
 	
 }

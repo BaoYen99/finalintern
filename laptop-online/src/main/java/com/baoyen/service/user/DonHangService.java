@@ -31,6 +31,10 @@ public class DonHangService {
 	public List<DonHang> findAll(){
 		return donHangRepo.findAll();
 	}
+	
+	public List<DonHang> getByMaNguoiDung(Integer id){
+		return donHangRepo.getByMaNguoiDung(id);
+	}
 	public List<DonHangDto> findAll(Pageable pageable) {
 		List<DonHangDto> donhangDto = new ArrayList<DonHangDto>();
 		List<DonHang> entities = donHangRepo.findAll(pageable).getContent();
@@ -119,6 +123,11 @@ public class DonHangService {
 	}
 	public void updateshipper(Integer idshipper,Integer id) {
 		donHangRepo.updateshipper(idshipper, id);
+	}
+
+	public void updateShipperNull(Integer id_don_hang) {
+		donHangRepo.updateShipperNull(id_don_hang);
+		
 	}
 
 	

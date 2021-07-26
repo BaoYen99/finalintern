@@ -37,7 +37,9 @@
 						</button>
 						<div class="dropdown-menu dropdown-menu-right">
 							 <a class="dropdown-item" href="/thoat"><i class="fas fa-sign-out-alt"> Đăng xuất</i> </a>
-							
+							<a
+								class="dropdown-item" href="/shipper/sua-thong-tin"><i
+								class="fas fa-user-edit"> Sửa Thông Tin</i> </a>
 						</div>
 					</div>
 		</security:authorize>

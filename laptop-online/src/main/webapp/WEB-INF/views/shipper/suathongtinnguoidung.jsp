@@ -29,7 +29,7 @@
             <input type="text" class="form-control mb-4" id="sdt" name="sdt" value="${nguoidung.std }"/>
              
             <button type="submit" class="btn btn-danger" id="btn-submit">Submit</button>
-            <a href="trang-chu?page=1&limit=9" class="btn btn-warning text-decoration-none">Trở về trang chủ</a>
+            <a href="xem-don-hang" class="btn btn-warning text-decoration-none">Trở về trang chủ</a>
        
          </form>
         

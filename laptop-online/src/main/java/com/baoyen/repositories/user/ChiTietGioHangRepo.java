@@ -45,6 +45,8 @@ public interface ChiTietGioHangRepo extends JpaRepository<ChiTietGioHang, Intege
 	 @Transactional
 	 @Query(value = "DELETE from chi_tiet_gio_hang WHERE ma_gio_hang =:ma",nativeQuery = true)
 	 void deleteById(@Param("ma")Integer id);
+
+	
 	 
   }
  

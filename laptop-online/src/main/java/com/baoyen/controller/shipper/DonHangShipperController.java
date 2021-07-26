@@ -26,13 +26,15 @@ public class DonHangShipperController {
 	@GetMapping(value = "shipper/xem-don-hang")
 	public ModelAndView showDonHang(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("shipper/xemdonhang");
-	
+		mv.addObject("xemdonhang", "1");
 		mv.addObject("donhang",donHangService.findByShipper());
+		
 		return mv;
 	}
 	@GetMapping(value = "shipper/luu-don-hang")
 	public ModelAndView luuDonHang(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("shipper/xemdonhang");
+		mv.addObject("xemdonhang", "1");
 		Integer iddonhang=Integer.parseInt(request.getParameter("id_don_hang"));
 		donHangService.updateshipper(SecurityUtils.getPrincipal().getId(), iddonhang);
 		mv.addObject("donhang", donHangService.findByShipper());
@@ -42,7 +44,7 @@ public class DonHangShipperController {
 	@GetMapping(value = "shipper/xem-don-hang-da-chon")
 	public ModelAndView showDonHangDaChon(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("shipper/donhangdanhan");
-	
+		mv.addObject("xemdonhang", "2");
 		mv.addObject("donhang",donHangService.findByIdShipper(SecurityUtils.getPrincipal().getId()));
 		return mv;
 	}
@@ -74,11 +76,22 @@ public class DonHangShipperController {
 		mv.addObject("donhang",donHangService.findById(id_don_hang));
 		return mv;
 	}
+	
+	@GetMapping(value = "shipper/xoa-khoi-chon")
+	public ModelAndView xoakhoichon(HttpServletRequest request) {
+		 ModelAndView mv =new ModelAndView("shipper/donhangdanhan");
+		 Integer id_don_hang=Integer.parseInt(request.getParameter("iddonhang"));
+		 donHangService.updateShipperNull(id_don_hang);
+		 mv.addObject("xemdonhang", "2");
+		mv.addObject("donhang",donHangService.findByIdShipper(SecurityUtils.getPrincipal().getId()));
+		 return mv;
+	}
+	
 	@GetMapping(value = "shipper/xem-chi-tiet-don-hang")
 	public ModelAndView chiTietDonHang(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("shipper/chitietdonhang");
 		Integer id_don_hang=Integer.parseInt(request.getParameter("id_don_hang"));
-		
+		mv.addObject("xemdonhang", request.getParameter("xemdonhang"));
 		mv.addObject("chitietdonhang",chiTietDonHangService.getByMaGioHang(id_don_hang));
 		return mv;
 	}

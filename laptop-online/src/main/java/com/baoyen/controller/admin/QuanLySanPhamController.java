@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.baoyen.dto.SanPhamDto;
+import com.baoyen.service.user.ChiTietDonHangService;
+import com.baoyen.service.user.ChiTietGioHangService;
 import com.baoyen.service.user.SanPhamService;
 
 @Controller
@@ -19,6 +21,10 @@ public class QuanLySanPhamController {
 
 	@Autowired
 	SanPhamService sanPhamService;
+	@Autowired
+	ChiTietGioHangService chiTietGioHangService;
+	@Autowired
+	ChiTietDonHangService chiTietDonHangService;
 
 	@GetMapping(value = "/admin/quan-ly-san-pham")
 	public ModelAndView quanLySanPham(HttpServletRequest request) {
@@ -65,7 +71,10 @@ public class QuanLySanPhamController {
 	public ModelAndView xoaSanPham(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:"+"quan-ly-san-pham?page=1&limit=14");
 		Integer id = Integer.parseInt(request.getParameter("id"));
-		sanPhamService.deleteById(id);
+		if(chiTietDonHangService.getByMaSanPham(id) == null && chiTietGioHangService.findByIdSanPham(id) == null) {
+			sanPhamService.deleteById(id);
+		}
+		
 		return mv;
 	}
 

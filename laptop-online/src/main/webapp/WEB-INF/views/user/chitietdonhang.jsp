@@ -9,7 +9,7 @@
 
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="margin-bottom: 245px">
 		<h1 class="text-center mt-5">Chi Tiết Đơn Hàng</h1>
 
 		<div class="w-100 ">
@@ -61,12 +61,8 @@
 			<p class="mt-4 ">Tổng Tiền: ${tongtien}$    <b style="color: red; margin-right: 10px;margin-left: 10px;">${trangthai}</b>    <b style="color: orange ;">${trangthaidonhang}</b></p>
 		</div>
 
-			<c:if test="${xemdonhang == '1'}">
-			<a href="xem-don-hang"  class=" btn btn-outline-secondary text-decoration-none text-dark">Trở Về</a>
-			</c:if>
-			<c:if test="${xemdonhang == '2'}">
-			<a href="xem-don-hang-da-chon"  class=" btn btn-outline-secondary text-decoration-none text-dark">Trở Về</a>
-			</c:if>
+		
+			<a href="xem-don-hang-mua"  class=" btn btn-outline-secondary text-decoration-none text-dark">Trở Về</a>
 		
 	</div>
 

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.baoyen.entities.user.ChiTietDonHang;
@@ -98,6 +99,21 @@ public class DonHangController {
 			session.removeAttribute("tongtien");
 			
 		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "user/xem-don-hang-mua")
+	public ModelAndView xem() {
+		ModelAndView mv= new ModelAndView("user/xemtatcadonhang");
+		mv.addObject("donhang", donHangService.getByMaNguoiDung(SecurityUtils.getPrincipal().getId()));
+		return mv;
+	}
+	@GetMapping(value = "user/xem-chi-tiet-don-hang")
+	public ModelAndView chiTietDonHang(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("user/chitietdonhang");
+		Integer id_don_hang=Integer.parseInt(request.getParameter("id_don_hang"));
+		
+		mv.addObject("chitietdonhang",chiTietDonHangService.getByMaGioHang(id_don_hang));
 		return mv;
 	}
 }

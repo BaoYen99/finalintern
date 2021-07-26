@@ -29,7 +29,7 @@
         <a class="nav-link" href="/admin/quan-ly-san-pham?page=1&limit=14">Sản Phẩm</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/admin/quan-ly-don-hang?page=1&limit=10">Đơn Hàng</a>
+        <a class="nav-link" href="/admin/quan-ly-don-hang?page=1&limit=7">Đơn Hàng</a>
       </li>
       <li>
       <form action="/admin/search" method="post">
@@ -84,6 +84,9 @@
 							 <a
 								class="dropdown-item" href="/user/sua-thong-tin"><i
 								class="fas fa-user-edit"> Sửa Thông Tin</i> </a>
+								<% if(SecurityUtils.getAuthorities().contains("USER")) {%>
+								 <a class="dropdown-item" href="xem-don-hang-mua"><i  class="fas fa-eye"> Xem Đơn Hàng</i> </a>
+								<%} %>
 								<%-- <% if (SecurityUtils.getPrincipal().getUsername().equals("admin")==true){	
 								%>
 									<a class="dropdown-item" href="/admin/trang-chu"><i class="fas fa-home"> Quay lại Trang Admin</i> </a>

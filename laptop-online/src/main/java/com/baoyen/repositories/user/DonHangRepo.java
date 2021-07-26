@@ -24,6 +24,9 @@ public interface DonHangRepo extends JpaRepository<DonHang, Integer>{
 
 	 @Query(value = "SELECT id from don_hang where ma_nguoi_dung =:ma  order by id desc limit 1",nativeQuery = true)
 	 Integer getIdDonHang(@Param("ma") Integer ma);
+	 
+	 @Query(value = "SELECT * from don_hang where ma_nguoi_dung =:ma",nativeQuery = true)
+	 List<DonHang> getByMaNguoiDung(@Param("ma") Integer ma);
 
 	 @Modifying
 	 @Transactional
@@ -66,7 +69,12 @@ public interface DonHangRepo extends JpaRepository<DonHang, Integer>{
 	List<DonHang> findByIdShipper(@Param("id") Integer id);  
 	
 	@Modifying
-	 @Transactional
+	@Transactional
 	@Query(value = "update don_hang SET id_shipper =:idshipper  WHERE id =:id",nativeQuery = true)
 	void updateshipper( @Param("idshipper")Integer idshipper,@Param("id") Integer id);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "update don_hang SET id_shipper = null  WHERE id =:id",nativeQuery = true)
+	void updateShipperNull(@Param("id")Integer id);
 }

@@ -26,4 +26,7 @@ public interface ChiTietDonHangRepo extends JpaRepository<ChiTietDonHang, Intege
 	@Transactional
 	@Query(value = "DELETE from chi_tiet_don_hang WHERE id =:id",nativeQuery = true)
 	void deleteById( @Param("id")Integer id);
+
+	@Query(value = "SELECT *  FROM chi_tiet_don_hang WHERE ma_san_pham =:id",nativeQuery =true)
+	List<ChiTietDonHang> getByMaSanPham(@Param("id")Integer id);
 }
