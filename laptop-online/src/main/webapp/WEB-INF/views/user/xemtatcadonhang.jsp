@@ -44,7 +44,11 @@
                   	<td style="color: rgb(190, 92, 12);">${ item.trangThaiThanhToan.tenTrangThai}</td>
                   	<td style="color: rgb(40, 158, 50);">${ item.trangThaiDonHang.tenTrangThai}</td>
                   	
-					<td ><a href="xem-chi-tiet-don-hang?id_don_hang=${ item.id}" class="mr-3">Xem Chi Tiet</a>
+					<td ><a href="xem-chi-tiet-don-hang?id_don_hang=${ item.id}" class=" d-block text-center">Xem Chi Tiet</a>
+					<c:if test="${ item.trangThaiThanhToan.id == 2 && item.trangThaiDonHang.id ==2}">
+				   <a href="xoa-don-hang?id=${ item.id}" style="color: red;" class=" d-block text-center">Hủy Đơn Hàng</a>
+				   </c:if>
+					
 					
 					 
 					  </td>

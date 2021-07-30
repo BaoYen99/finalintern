@@ -61,7 +61,7 @@
 									</p>
 									
 									<div class="card-body">
-									<c:if test="${item.soLuongKho == 0 }"> 
+									<c:if test="${item.soLuongKho <= 0 }"> 
                   	  							<p style="color :red ;margin-bottom: 2px; margin-top: -15px">Hết Hàng</p>
                   	  					</c:if>
     								<security:authorize access = "isAnonymous()">
@@ -70,10 +70,10 @@
 									<security:authorize access = "isAuthenticated()">
 									 <% if (SecurityUtils.getAuthorities().contains("USER")){
 										 %>
-										<c:if test="${item.soLuongKho == 0}">
+										<c:if test="${item.soLuongKho <= 0}">
 									 	<p  style="display: none;" >	<a href="gio-hang?id=${item.id}" class="d-inline-block mr-5 " ><i class="fas fa-cart-plus"></i></a></p>
 									 	</c:if>
-									 	<c:if test="${item.soLuongKho != 0}">
+									 	<c:if test="${item.soLuongKho > 0}">
 									 	<p  style="display: inline-block;" >	<a href="gio-hang?id=${item.id}" class="d-inline-block mr-5 " ><i class="fas fa-cart-plus"></i></a></p>
 									 	</c:if>
 									<% }

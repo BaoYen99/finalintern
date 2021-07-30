@@ -49,11 +49,13 @@
 						<a href="trang-chu?page=1&limit=9" class=" form-control btn btn-secondary mt-2 text-light text-decoration-none">Tiếp tục shopping</a>
 				
 						<a href="gio-hang-remove-all?id_gio_hang=${id_gio_hang}" class="form-control btn btn-secondary mt-2 mb-2 text-light text-decoration-none">Xóa hết sản phẩm</a>
-						
+
 						<a href="don-hang" class="form-control btn btn-secondary text-light text-decoration-none">Đặt Hàng</a>
+						
 				</div>
 			</div>
 		</div>
+		<div>${alert }</div>
 	</div>
 </main>
 

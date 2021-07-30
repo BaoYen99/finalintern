@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.baoyen.entities.user.DonHang;
 import com.baoyen.entities.user.SanPham;
 
 
@@ -61,6 +62,11 @@ public interface SanPhamRepo extends JpaRepository<SanPham, Integer>{
 	 @Query(value = "SELECT * FROM san_pham where LOWER(ten_san_pham) like LOWER(concat('%',:ten,'%'))",nativeQuery = true)
 	 List<SanPham> getSanPhamByName(@Param("ten") String ten);
 	 
+	 
+	 @Query(value = "SELECT * FROM san_pham    ORDER BY id desc , ?#{#pageable}",
+		       countQuery = "SELECT * FROM san_pham",
+		       nativeQuery = true)
+	  Page<SanPham> findAll(Pageable pageable);
 }
 	
 	

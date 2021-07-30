@@ -2,12 +2,15 @@ package com.baoyen.repositories.user;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.baoyen.entities.user.DonHang;
 import com.baoyen.entities.user.NguoiDung;
 
 public interface NguoiDungRepo extends JpaRepository<NguoiDung, Integer> {
@@ -31,5 +34,10 @@ public interface NguoiDungRepo extends JpaRepository<NguoiDung, Integer> {
 	 @Query(value = "SELECT * FROM nguoi_dung where LOWER(ten_nguoi_dung) like LOWER(concat('%',:username,'%'))",nativeQuery = true)
 	
 	List<NguoiDung> getNguoiDungByUserName(@Param("username")String username);
+	 
+	 @Query(value = "SELECT * FROM nguoi_dung    ORDER BY id desc , ?#{#pageable}",
+		       countQuery = "SELECT * FROM nguoi_dung",
+		       nativeQuery = true)
+	  Page<NguoiDung> findAll(Pageable pageable);
 	
 }

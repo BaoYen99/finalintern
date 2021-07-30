@@ -47,7 +47,7 @@
 						<a href="trang-chu?page=1&limit=9" class=" btn form-control mb-2 btn-secondary text-light text-decoration-none">Trở
 							về trang chủ</a>
 							
-							<c:if test="${sanpham.soLuongKho == 0 }"> 
+							<c:if test="${sanpham.soLuongKho <= 0 }"> 
                   	  				<p style="text-align: center;color :red ;background-color:yellow; margin-top: 15px ;border: 1px solid black">Hết Hàng</p>
                   	  		</c:if>
 						<security:authorize access="isAnonymous()">

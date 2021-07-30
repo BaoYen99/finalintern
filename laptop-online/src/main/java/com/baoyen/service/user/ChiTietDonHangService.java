@@ -26,9 +26,19 @@ public class ChiTietDonHangService {
 		
 	}
 
+	public void deleteByMaDonHang(Integer id) {
+		chiTietDonHangRepo.deleteByMaDonHang(id);
+		
+	}
+	
 	public List<ChiTietDonHang> getByMaSanPham(Integer id) {
 		// TODO Auto-generated method stub
 		return chiTietDonHangRepo.getByMaSanPham(id);
+	}
+
+	public List<ChiTietDonHang> findByIdLimit1(Integer ma,Integer madh) {
+		// TODO Auto-generated method stub
+		return chiTietDonHangRepo.findByIdLimit1(ma,madh);
 	}
 	
 }

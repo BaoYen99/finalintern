@@ -25,7 +25,7 @@ public interface DonHangRepo extends JpaRepository<DonHang, Integer>{
 	 @Query(value = "SELECT id from don_hang where ma_nguoi_dung =:ma  order by id desc limit 1",nativeQuery = true)
 	 Integer getIdDonHang(@Param("ma") Integer ma);
 	 
-	 @Query(value = "SELECT * from don_hang where ma_nguoi_dung =:ma",nativeQuery = true)
+	 @Query(value = "SELECT * from don_hang where ma_nguoi_dung =:ma order by id desc",nativeQuery = true)
 	 List<DonHang> getByMaNguoiDung(@Param("ma") Integer ma);
 
 	 @Modifying
@@ -62,10 +62,10 @@ public interface DonHangRepo extends JpaRepository<DonHang, Integer>{
 	void updatett2(@Param("ttdh")Integer ttdh,@Param("tttt")Integer tttt,@Param("id")Integer id,@Param("date") Date date,@Param("date2") Date date2);
 
 	
-	@Query(value = "SELECT * FROM don_hang WHERE id_shipper is  null ",nativeQuery =  true)
+	@Query(value = "SELECT * FROM don_hang WHERE id_shipper is  null order by id desc",nativeQuery =  true)
 	List<DonHang> findByShipper();  
 	
-	@Query(value = "SELECT * FROM don_hang WHERE id_shipper =:id ",nativeQuery =  true)
+	@Query(value = "SELECT * FROM don_hang WHERE id_shipper =:id  order by id desc",nativeQuery =  true)
 	List<DonHang> findByIdShipper(@Param("id") Integer id);  
 	
 	@Modifying
@@ -77,4 +77,10 @@ public interface DonHangRepo extends JpaRepository<DonHang, Integer>{
 	@Transactional
 	@Query(value = "update don_hang SET id_shipper = null  WHERE id =:id",nativeQuery = true)
 	void updateShipperNull(@Param("id")Integer id);
+	
+	@Query(value = "SELECT * FROM don_hang    ORDER BY id desc , ?#{#pageable}",
+		       countQuery = "SELECT * FROM don_hang",
+		       nativeQuery = true)
+	  Page<DonHang> findAll(Pageable pageable);
+	 
 }

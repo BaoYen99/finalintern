@@ -48,7 +48,7 @@ public class DonHangController {
 	@PostMapping(value = "/user/hoan-thanh-dat-hang")
 	public ModelAndView hoanThanhDatHang(HttpServletRequest request) {
 
-		ModelAndView mv = new ModelAndView("user/donhang");
+		ModelAndView mv = new ModelAndView("user/chitietdonhang");
 		HttpSession session = request.getSession();
 		Integer idUser = SecurityUtils.getPrincipal().getId();
 		String ten = request.getParameter("ten");
@@ -63,13 +63,13 @@ public class DonHangController {
 		else {
 			idttthanhtoan=1;
 		}
-		if(loaihinhthanhtoan.equals(2)) {
-			donHangService.saveDonHang1(diachi, ten, sdt, idUser,idttthanhtoan,2,loaihinhthanhtoan,new Date(),new Date());
-		}
-		else {
-			donHangService.saveDonHang(diachi, ten, sdt, idUser,idttthanhtoan,2,loaihinhthanhtoan,new Date());
-		}
 		
+		/*
+		 * if(loaihinhthanhtoan.equals(2)) { donHangService.saveDonHang1(diachi, ten,
+		 * sdt, idUser,idttthanhtoan,2,loaihinhthanhtoan,new Date(),new Date()); } else
+		 * { donHangService.saveDonHang(diachi, ten, sdt,
+		 * idUser,idttthanhtoan,2,loaihinhthanhtoan,new Date()); }
+		 */
 		Long tongtien = (Long) session.getAttribute("tongtien");
 		Object oject = session.getAttribute("cart");
 
@@ -85,12 +85,25 @@ public class DonHangController {
 				chiTietDonHang.setSanPham(item.getValue().getSanPham());
 				chitiet.add(chiTietDonHang);
 			}
+			
 			for (ChiTietDonHang it : chitiet) {
-				chiTietDonHangService.saveCTDH(it.getDonGia(), it.getSoLuong(), it.getTongTien(),
-						donHangService.getIdDonHang(idUser), it.getSanPham().getId());
-				sanPhamService.updateSanPhamSl(it.getSanPham().getSoLuongBan() + it.getSoLuong(),
-						sanPhamService.getSoLuongKho(it.getSanPham().getId()) - it.getSoLuong(),
-						it.getSanPham().getId());
+				if( sanPhamService.getSoLuongKho(it.getSanPham().getId())>0 && sanPhamService.getSoLuongKho(it.getSanPham().getId()) >= it.getSoLuong()) {
+					if(loaihinhthanhtoan.equals(2)) {
+						donHangService.saveDonHang1(diachi, ten, sdt, idUser,idttthanhtoan,2,loaihinhthanhtoan,new Date(),new Date());
+					}
+					else {
+						donHangService.saveDonHang(diachi, ten, sdt, idUser,idttthanhtoan,2,loaihinhthanhtoan,new Date());
+					}
+					
+
+					chiTietDonHangService.saveCTDH(it.getDonGia(), it.getSoLuong(), it.getTongTien(),
+							donHangService.getIdDonHang(idUser), it.getSanPham().getId());
+					sanPhamService.updateSanPhamSl(it.getSanPham().getSoLuongBan() + it.getSoLuong(),
+							sanPhamService.getSoLuongKho(it.getSanPham().getId()) - it.getSoLuong(),
+							it.getSanPham().getId());
+					
+				}
+				
 			}
 
 			chiTietGioHangService.deleteById(idGioHang);
@@ -99,6 +112,8 @@ public class DonHangController {
 			session.removeAttribute("tongtien");
 			
 		}
+		mv.addObject("chitietdonhang", chiTietDonHangService.findByIdLimit1(SecurityUtils.getPrincipal().getId()
+										,donHangService.getIdDonHang(SecurityUtils.getPrincipal().getId())));
 		return mv;
 	}
 	
@@ -114,6 +129,20 @@ public class DonHangController {
 		Integer id_don_hang=Integer.parseInt(request.getParameter("id_don_hang"));
 		
 		mv.addObject("chitietdonhang",chiTietDonHangService.getByMaGioHang(id_don_hang));
+		return mv;
+	}
+	@GetMapping(value = "user/xoa-don-hang")
+	public ModelAndView xoaDonHang(HttpServletRequest request) {
+		ModelAndView mv= new ModelAndView("user/xemtatcadonhang");
+		Integer id_don_hang=Integer.parseInt(request.getParameter("id"));
+		
+		List<ChiTietDonHang> list=	chiTietDonHangService.getByMaGioHang(id_don_hang);
+		for (ChiTietDonHang item:list) {
+			chiTietDonHangService.deleteById(item.getId());
+		}
+		
+		donHangService.deleteById(id_don_hang);
+		mv.addObject("donhang", donHangService.getByMaNguoiDung(SecurityUtils.getPrincipal().getId()));
 		return mv;
 	}
 }
